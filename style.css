@@ -1,0 +1,47 @@
+const alloyData = [
+    { name: "ALSI1%(세아)", Si: "0.75~1.25", Fe: "0.25↓", Cu: "0.01↓", Mn: "0.03↓", Mg: "0.01↓", Ni: "0.01↓", Zn: "0.01↓", Ti: "0.01↓", Cr: "0.01↓", Pb: "0.01↓", Sn: "0.01↓", Al: "나머지" },
+    { name: "ALSI9%(포스코)", Si: "8.7~9.3", Fe: "0.9~1.3", Cu: "0.01↓", Mn: "0.01↓", Mg: "0.01↓", Ni: "0.01↓", Zn: "0.03↓", Ti: "0.01↓", Cr: "0.005↓", Pb: "0.01↓", Sn: "0.005↓", Al: "나머지" },
+    { name: "ALSI10%(동부)", Si: "9.2~9.6", Fe: "0.3↓", Cu: "0.01↓", Mn: "0.01↓", Mg: "0.01↓", Ni: "0.01↓", Zn: "0.01↓", Ti: "0.01↓", Cr: "0.01↓", Pb: "0.01↓", Sn: "0.01", Al: "나머지" },
+    { name: "갈바륨괴(수출)", Si: "1.5~1.7", Fe: "0.15↓", Cu: "0.01↓", Mn: "0.01↓", Mg: "0.01↓", Ni: "0.01↓", Zn: "41~44", Ti: "0.01↓", Cr: "0.005↓", Pb: "0.01↓", Sn: "0.01↓", Al: "나머지" }
+];
+
+function loadTable() {
+    const tableBody = document.querySelector("#alloyTable tbody");
+    tableBody.innerHTML = "";
+
+    alloyData.forEach(alloy => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${alloy.name}</td>
+            <td>${alloy.Si}</td>
+            <td>${alloy.Fe}</td>
+            <td>${alloy.Cu}</td>
+            <td>${alloy.Mn}</td>
+            <td>${alloy.Mg}</td>
+            <td>${alloy.Ni}</td>
+            <td>${alloy.Zn}</td>
+            <td>${alloy.Ti}</td>
+            <td>${alloy.Cr}</td>
+            <td>${alloy.Pb}</td>
+            <td>${alloy.Sn}</td>
+            <td>${alloy.Al}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+function searchTable() {
+    const input = document.getElementById("searchBox").value.toLowerCase();
+    const rows = document.querySelectorAll("#alloyTable tbody tr");
+
+    rows.forEach(row => {
+        const alloyName = row.cells[0].textContent.toLowerCase();
+        if (alloyName.includes(input)) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", loadTable);
